@@ -1,98 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>DARNA Bot - Terms of Service</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #0f172a;
-            color: #f1f5f9;
-            margin: 0;
-            padding: 40px;
-            line-height: 1.6;
-        }
-        h1, h2 {
-            color: #38bdf8;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background-color: #1e293b;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-        footer {
-            margin-top: 40px;
-            font-size: 14px;
-            opacity: 0.7;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DARNA Bot - Terms of Service</title>
+
+  <style>
+    :root{
+      --gold: #d4af37;
+      --gold2:#f7d774;
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --glass: rgba(10, 15, 25, 0.72);
+      --glass2: rgba(20, 30, 50, 0.55);
+      --border: rgba(212, 175, 55, 0.25);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: url("Darna Background.png") no-repeat center center fixed;
+      background-size: cover;
+      overflow-x:hidden;
+    }
+
+    /* soft luxury overlay */
+    .overlay{
+      min-height:100vh;
+      padding: 28px 18px 50px;
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(212,175,55,.18), transparent 60%),
+        radial-gradient(900px 500px at 80% 20%, rgba(247,215,116,.10), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.50), rgba(0,0,0,.78));
+      backdrop-filter: blur(2px);
+    }
+
+    .topbar{
+      max-width: 980px;
+      margin: 0 auto 18px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+      opacity:0;
+      transform: translateY(-12px);
+      animation: fadeDown .8s ease forwards;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      user-select:none;
+    }
+
+    .brand img{
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.55));
+      border-radius: 12px;
+      background: rgba(0,0,0,.25);
+      padding: 6px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .brand-title{
+      line-height:1.1;
+    }
+    .brand-title .name{
+      font-size: 18px;
+      letter-spacing: 1px;
+      font-weight: 800;
+      color: var(--gold2);
+      text-shadow: 0 10px 24px rgba(0,0,0,.55);
+    }
+    .brand-title .tag{
+      font-size: 12px;
+      color: var(--muted);
+      opacity: .95;
+    }
+
+    .lang-toggle{
+      display:flex;
+      gap: 8px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 999px;
+      padding: 6px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .lang-toggle button{
+      cursor:pointer;
+      border:0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      color: var(--text);
+      background: transparent;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .lang-toggle button:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+    }
+    .lang-toggle button.active{
+      background: linear-gradient(135deg, rgba(212,175,55,.35), rgba(247,215,116,.20));
+      border: 1px solid rgba(212,175,55,.35);
+      color: var(--gold2);
+    }
+
+    .container{
+      max-width: 980px;
+      margin: 0 auto;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--glass), var(--glass2));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      opacity:0;
+      transform: translateY(18px);
+      animation: fadeUp .9s ease .15s forwards;
+    }
+
+    /* gold top accent */
+    .container::before{
+      content:"";
+      position:absolute;
+      left:0; top:0;
+      height:3px; width:100%;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold2), var(--gold), transparent);
+      opacity:.95;
+    }
+
+    .content{
+      padding: 26px 26px 30px;
+    }
+
+    .hero{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .hero h1{
+      margin:0;
+      font-size: 30px;
+      letter-spacing: .3px;
+      color: var(--gold2);
+      text-shadow: 0 12px 30px rgba(0,0,0,.55);
+    }
+    .hero p{
+      margin:0;
+      color: var(--muted);
+    }
+
+    .card{
+      margin-top: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.22);
+      padding: 18px;
+    }
+
+    h2{
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      color: var(--gold2);
+    }
+    p, li{
+      color: var(--text);
+      opacity: .96;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    ul{
+      margin: 10px 0 0 18px;
+    }
+
+    .footer{
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+      font-size: 13px;
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Arabic section */
+    .rtl{
+      direction: rtl;
+      text-align: right;
+      font-family: Arial, sans-serif;
+    }
+
+    /* smooth section reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(12px);
+      animation: sectionIn .7s ease forwards;
+    }
+    .delay1{ animation-delay: .08s; }
+    .delay2{ animation-delay: .16s; }
+    .delay3{ animation-delay: .24s; }
+    .delay4{ animation-delay: .32s; }
+    .delay5{ animation-delay: .40s; }
+
+    @keyframes fadeUp{
+      to{ opacity:1; transform: translateY(0); }
+    }
+    @keyframes fadeDown{
+      to{ opacity:1; transform: translateY(0); }
+    }
+    @keyframes sectionIn{
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    /* mobile */
+    @media (max-width: 640px){
+      .brand-title .name{ font-size: 16px; }
+      .hero h1{ font-size: 24px; }
+      .content{ padding: 20px; }
+      .brand img{ width:46px; height:46px; }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="overlay">
 
-<div class="container">
-    <h1>DARNA Bot - Terms of Service</h1>
-    <p><strong>Last Updated:</strong> February 26, 2026</p>
+    <div class="topbar">
+      <div class="brand">
+        <!-- Put your logo file in repo as: logo.png -->
+        <img src="Darna Logo.png" alt="DARNA Logo" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='block';"/>
+        <div class="brand-title">
+          <div class="name">DARNA</div>
+          <div class="tag">Luxury Admin Assistant Bot</div>
+        </div>
+        <div id="logoFallback" style="display:none; margin-left:8px; font-weight:800; color: var(--gold2);">DARNA</div>
+      </div>
 
-    <h2>1. Acceptance of Terms</h2>
-    <p>By inviting or using the DARNA Discord Bot ("Bot"), you agree to these Terms of Service. 
-    If you do not agree with these terms, you must remove the Bot from your server immediately.</p>
+      <div class="lang-toggle" role="tablist" aria-label="Language toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')" aria-selected="true">English</button>
+        <button id="btn-ar" onclick="setLang('ar')" aria-selected="false">العربية</button>
+      </div>
+    </div>
 
-    <h2>2. Description of Service</h2>
-    <p>DARNA is a Discord bot designed to assist server administrators and members with moderation, 
-    management, automation, entertainment, and utility features.</p>
+    <div class="container">
+      <div class="content">
 
-    <h2>3. Eligibility</h2>
-    <p>You must comply with Discord's Terms of Service and Community Guidelines to use this Bot. 
-    Users violating Discord’s policies may lose access to DARNA.</p>
+        <!-- ENGLISH -->
+        <div id="tos-en">
+          <div class="hero">
+            <h1>DARNA Bot — Terms of Service</h1>
+            <p><strong>Last Updated:</strong> February 26, 2026</p>
+          </div>
 
-    <h2>4. Data Collection</h2>
-    <p>DARNA may collect and store limited data necessary for functionality, including:</p>
-    <ul>
-        <li>User IDs</li>
-        <li>Server IDs</li>
-        <li>Role IDs</li>
-        <li>Channel IDs</li>
-        <li>Command usage logs</li>
-    </ul>
-    <p>DARNA does NOT collect passwords, private messages outside servers, or sensitive personal information.</p>
+          <div class="card reveal delay1">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By inviting or using the DARNA Discord Bot (“Bot”), you agree to these Terms of Service. If you do not agree, you must remove the Bot from your server.</p>
+          </div>
 
-    <h2>5. Data Usage</h2>
-    <p>Collected data is used strictly for:</p>
-    <ul>
-        <li>Bot functionality</li>
-        <li>Moderation features</li>
-        <li>Logging actions</li>
-        <li>Improving performance</li>
-    </ul>
-    <p>Data is not sold, shared, or distributed to third parties.</p>
+          <div class="card reveal delay2">
+            <h2>2. Description of Service</h2>
+            <p>DARNA is a Discord bot designed to assist server administrators and members with moderation, management, automation, entertainment, and utility features.</p>
+          </div>
 
-    <h2>6. Moderation & Responsibility</h2>
-    <p>Server owners and administrators are fully responsible for how they use DARNA. 
-    The developer is not responsible for misuse of moderation commands or server actions.</p>
+          <div class="card reveal delay3">
+            <h2>3. Eligibility</h2>
+            <p>You must comply with Discord’s Terms of Service and Community Guidelines to use this Bot. Abuse, exploitation, or policy violations may result in loss of access.</p>
+          </div>
 
-    <h2>7. Service Availability</h2>
-    <p>The Bot is provided "as is" without warranties of any kind. 
-    We do not guarantee uninterrupted uptime and reserve the right to modify or discontinue features at any time.</p>
+          <div class="card reveal delay4">
+            <h2>4. Data Collection</h2>
+            <p>DARNA may collect and store limited data required for functionality, such as:</p>
+            <ul>
+              <li>User IDs</li>
+              <li>Server IDs</li>
+              <li>Role IDs</li>
+              <li>Channel IDs</li>
+              <li>Command usage logs (for debugging and moderation history)</li>
+            </ul>
+            <p>DARNA does <strong>not</strong> collect passwords or sensitive personal information.</p>
+          </div>
 
-    <h2>8. Termination</h2>
-    <p>We reserve the right to deny service, remove access, or ban servers that misuse the Bot 
-    or violate these Terms.</p>
+          <div class="card reveal delay5">
+            <h2>5. Responsibility, Availability, and Changes</h2>
+            <p>Server owners and administrators are responsible for how they use DARNA. The Bot is provided “as is,” uptime is not guaranteed, and features may change or be discontinued at any time. Continued use after updates means you accept the updated Terms.</p>
+          </div>
 
-    <h2>9. Changes to Terms</h2>
-    <p>These Terms may be updated at any time. Continued use of the Bot after changes 
-    means acceptance of the updated Terms.</p>
+          <div class="footer">
+            <div>© 2026 DARNA Bot. All rights reserved.</div>
+            <div>Contact: Developer via Discord</div>
+          </div>
+        </div>
 
-    <h2>10. Contact</h2>
-    <p>For support or inquiries, contact the developer via Discord.</p>
+        <!-- ARABIC -->
+        <div id="tos-ar" class="rtl" style="display:none;">
+          <div class="hero">
+            <h1>بوت دارنا — شروط الاستخدام</h1>
+            <p><strong>آخر تحديث:</strong> 26 فبراير 2026</p>
+          </div>
 
-    <footer>
-        © 2026 DARNA Bot. All rights reserved.
-    </footer>
-</div>
+          <div class="card reveal delay1">
+            <h2>1. الموافقة على الشروط</h2>
+            <p>باستخدامك أو دعوتك لبوت دارنا (“البوت”)، أنت توافق على شروط الاستخدام هذه. إذا ما توافق، لازم تشيل البوت من السيرفر.</p>
+          </div>
 
+          <div class="card reveal delay2">
+            <h2>2. وصف الخدمة</h2>
+            <p>دارنا بوت يساعد إدارة السيرفر والأعضاء في أدوات الإدارة، التنظيم، الموديريشن، الأتمتة، والترفيه.</p>
+          </div>
+
+          <div class="card reveal delay3">
+            <h2>3. الأهلية</h2>
+            <p>لازم تلتزم بسياسات وشروط دسكورد. أي إساءة استخدام أو مخالفة قد تؤدي لإيقاف الوصول للبوت.</p>
+          </div>
+
+          <div class="card reveal delay4">
+            <h2>4. جمع البيانات</h2>
+            <p>قد يتم جمع بيانات بسيطة ضرورية لعمل البوت مثل:</p>
+            <ul>
+              <li>معرّفات المستخدم (User IDs)</li>
+              <li>معرّفات السيرفر (Server IDs)</li>
+              <li>معرّفات الرتب (Role IDs)</li>
+              <li>معرّفات القنوات (Channel IDs)</li>
+              <li>سجل استخدام الأوامر (للتشخيص والتتبع الإداري)</li>
+            </ul>
+            <p>البوت ما يجمع كلمات مرور أو معلومات حساسة.</p>
+          </div>
+
+          <div class="card reveal delay5">
+            <h2>5. المسؤولية والتوفر والتحديثات</h2>
+            <p>مسؤولية استخدام البوت تقع على صاحب السيرفر والإدارة. الخدمة “كما هي”، وقد تتغير الميزات أو تتوقف. استمرارك باستخدام البوت بعد التحديث يعني موافقتك على الشروط الجديدة.</p>
+          </div>
+
+          <div class="footer">
+            <div>© 2026 DARNA Bot. جميع الحقوق محفوظة.</div>
+            <div>للتواصل: مطور البوت عبر دسكورد</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function setLang(lang){
+      const en = document.getElementById("tos-en");
+      const ar = document.getElementById("tos-ar");
+      const btnEn = document.getElementById("btn-en");
+      const btnAr = document.getElementById("btn-ar");
+
+      if(lang === "ar"){
+        en.style.display = "none";
+        ar.style.display = "block";
+        btnEn.classList.remove("active");
+        btnAr.classList.add("active");
+        btnEn.setAttribute("aria-selected","false");
+        btnAr.setAttribute("aria-selected","true");
+        document.title = "DARNA Bot - شروط الاستخدام";
+      } else {
+        ar.style.display = "none";
+        en.style.display = "block";
+        btnAr.classList.remove("active");
+        btnEn.classList.add("active");
+        btnAr.setAttribute("aria-selected","false");
+        btnEn.setAttribute("aria-selected","true");
+        document.title = "DARNA Bot - Terms of Service";
+      }
+    }
+  </script>
 </body>
 </html>
